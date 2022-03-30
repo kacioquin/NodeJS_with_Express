@@ -1,0 +1,10 @@
+{
+  "name": "mycontacts",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Cassio",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
