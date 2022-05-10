@@ -20,8 +20,10 @@ let contacts = [
 ];
 
 class ContactRepository {
-  findAll() {
-    return new Promise((resolve) => resolve(contacts));
+  async findAll(orderBy = 'ASC') {
+    const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC'
+    const rows = await db.query(`SELECT * FROM contacts ORDER BY name ${direction}`);
+    return rows;
   }
 
   findById(id) {
@@ -47,7 +49,7 @@ async create({
   name, email, phone, category_id,
 }) {
   const [ row ] = await db.query(`
-    INSERT INTO contacts(name, email, phone )
+    INSERT INTO contacts(name, email, phone, category_id)
     VALUES($1, $2, $3, $4)
     RETURNING *
     `, [name, email, phone, category_id]
